@@ -11,11 +11,6 @@
     <PackageLicenseUrl>https://raw.githubusercontent.com/launchdarkly/dotnet-cache/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.15.2" />
-    <PackageReference Include="LaunchDarkly.Client" Version="5.6.0-beta2" />
-  </ItemGroup>
-
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
     <DocumentationFile>bin\Release\netstandard2.0\LaunchDarkly.Cache.xml</DocumentationFile>
   </PropertyGroup>
