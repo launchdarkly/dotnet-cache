@@ -14,7 +14,7 @@ jobs:
       - run: dotnet restore
       - run: dotnet build src/LaunchDarkly.Cache -f netstandard1.4
       - run: dotnet build src/LaunchDarkly.Cache -f netstandard1.6
-      - run: dotnet test test/LaunchDarkly.Cache.Tests -f netcoreapp1.1
+      - run: dotnet test test/LaunchDarkly.Cache.Tests/LaunchDarkly.Cache.Tests.csproj -f netcoreapp1.1
   test-2.0:
     docker:
       - image: microsoft/dotnet:2.0-sdk-jessie
@@ -22,4 +22,4 @@ jobs:
       - checkout
       - run: dotnet restore
       - run: dotnet build src/LaunchDarkly.Cache -f netstandard2.0
-      - run: dotnet test test/LaunchDarkly.Cache.Tests -f netcoreapp2.0
+      - run: dotnet test test/LaunchDarkly.Cache.Tests/LaunchDarkly.Cache.Tests.csproj -f netcoreapp2.0
