@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+    <PackageId>LaunchDarkly.Cache</PackageId>
+    <AssemblyName>LaunchDarkly.Cache</AssemblyName>
+    <TargetFrameworks>netstandard1.6;netstandard2.0;net45</TargetFrameworks>
+    <OutputType>Library</OutputType>
+    <Description>LaunchDarkly .NET Cache Library</Description>
+    <Company>LaunchDarkly</Company>
+    <Copyright>Copyright 2018 Catamorphic, Co.</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/launchdarkly/dotnet-cache/master/LICENSE</PackageLicenseUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.3.15.2" />
+    <PackageReference Include="LaunchDarkly.Client" Version="5.6.0-beta2" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>bin\Release\netstandard2.0\LaunchDarkly.Cache.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>../../LaunchDarkly.Cache.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+</Project>
