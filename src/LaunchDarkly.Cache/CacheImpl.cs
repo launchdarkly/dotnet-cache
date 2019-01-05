@@ -126,7 +126,7 @@ namespace LaunchDarkly.Cache
                 entry = null;
                 if (!_entries.TryGetValue(key, out entry) || entry.IsExpired())
                 {
-                    if (entry != null)
+                    if (entry != null) // An entry does exist, but it's expired
                     {
                         _keysInCreationOrder.Remove(entry.node);
                     }
