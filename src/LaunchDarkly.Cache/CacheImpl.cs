@@ -246,6 +246,10 @@ namespace LaunchDarkly.Cache
         private void PurgeExcessEntries()
         {
             // must be called under a write lock
+            if (!_wholeCacheLock.IsWriteLockHeld)
+            {
+                return;
+            }
             if (_maxEntries != null)
             {
                 while (_entries.Count > _maxEntries.Value)
