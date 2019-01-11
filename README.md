@@ -12,7 +12,7 @@ This version of the library is compatible with .NET Framework version 4.5 and ab
 Signing
 -------
 
-The published version of this assembly is digitally signed by LaunchDarkly and strong-named. Building the code locally in the default Debug configuration does not sign the assembly and does not require a key file.
+The published version of this assembly is strong-named (but is not digitally signed with Authenticode). Building the code locally in the default Debug configuration does not sign the assembly and does not require a key file.
 
 Development notes
 -----------------
