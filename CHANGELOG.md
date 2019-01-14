@@ -2,6 +2,10 @@
 
 All notable changes to the LaunchDarkly .NET cache library will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org).
 
+## [1.0.2] - 2019-01-14
+### Fixed:
+- The assemblies in this package now have Authenticode signatures.
+
 ## [1.0.1] - 2019-01-11
 
 This release was an error and is identical to 1.0.0.
