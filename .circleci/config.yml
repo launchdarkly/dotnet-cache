@@ -55,8 +55,6 @@ jobs:
     parameters:
       test-target-framework:
         type: string
-      uses-native-implementation:
-        type: boolean
     executor:
       name: win/default
       shell: powershell.exe
