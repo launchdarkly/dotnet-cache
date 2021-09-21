@@ -57,11 +57,18 @@ jobs:
 
   test-windows:
     parameters:
+      build-target-frameworks:
+        type: string
+        default: ""
       test-target-framework:
         type: string
     executor:
       name: win/default
       shell: powershell.exe
+    environment:
+      ASPNETCORE_SUPPRESSSTATUSMESSAGES: true
+      BUILDFRAMEWORKS: <<parameters.build-target-frameworks>>
+      TESTFRAMEWORKS: <<parameters.test-target-framework>>
     steps:
       - checkout
       - run:
