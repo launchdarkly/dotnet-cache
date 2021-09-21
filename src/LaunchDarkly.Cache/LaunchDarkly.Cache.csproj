@@ -1,18 +1,28 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <Version>1.0.2</Version>
+    <!--
+      The reason there's a mechanism here for overriding the target frameworks with
+      an environment variable is that we want to be able to run CI tests using older
+      SDKs which do not consider "net5.0" to be a valid target framework that can be
+      referenced in a project file.
+    -->
+    <BuildFrameworks Condition="'$(BUILDFRAMEWORKS)' == ''">netstandard2.0;net452</BuildFrameworks>
+    <TargetFrameworks>$(BUILDFRAMEWORKS)</TargetFrameworks>
+    <LangVersion>7.3</LangVersion>
+    <OutputType>Library</OutputType>
     <PackageId>LaunchDarkly.Cache</PackageId>
     <AssemblyName>LaunchDarkly.Cache</AssemblyName>
-    <TargetFrameworks>netstandard1.4;netstandard1.6;netstandard2.0;net45</TargetFrameworks>
-    <OutputType>Library</OutputType>
     <Description>LaunchDarkly .NET Cache Library</Description>
     <Company>LaunchDarkly</Company>
+    <Authors>LaunchDarkly</Authors>
+    <Owners>LaunchDarkly</Owners>
     <Copyright>Copyright 2018 Catamorphic, Co.</Copyright>
-    <PackageLicenseUrl>https://raw.githubusercontent.com/launchdarkly/dotnet-cache/master/LICENSE</PackageLicenseUrl>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
-    <DocumentationFile>bin\Release\netstandard2.0\LaunchDarkly.Cache.xml</DocumentationFile>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\LaunchDarkly.Cache.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

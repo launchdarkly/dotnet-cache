@@ -1,25 +1,70 @@
-version: 2
+version: 2.1
+
+orbs:
+  win: circleci/windows@2.4.0
+
 workflows:
   version: 2
   test:
     jobs:
-      - test-1.1
-      - test-2.0
+      - test-linux:
+          name: .NET Core 2.1 (Linux)
+          docker-image: mcr.microsoft.com/dotnet/core/sdk:2.1-focal
+          build-target-frameworks: netcoreapp2.1
+          test-target-framework: netcoreapp2.1
+      - test-linux:
+          name: .NET 5.0 (Linux)
+          docker-image: mcr.microsoft.com/dotnet/sdk:5.0-focal
+          test-target-framework: net5.0
+      - test-windows:
+          name: .NET Core 3.1 (Windows)
+          test-target-framework: netcoreapp3.1
+      - test-windows:
+          name: .NET 5.0 (Windows)
+          test-target-framework: net5.0
+      - test-windows:
+          name: .NET Framework 4.5.2 (Windows)
+          test-target-framework: net452
+
 jobs:
-  test-1.1:
+  test-linux:
+    parameters:
+      docker-image:
+        type: string
+      build-target-frameworks:
+        type: string
+        default: ""
+      test-target-framework:
+        type: string
     docker:
-      - image: microsoft/dotnet:1.1-sdk
+      - image: <<parameters.docker-image>>
+    environment:
+      ASPNETCORE_SUPPRESSSTATUSMESSAGES: true
+      BUILDFRAMEWORKS: <<parameters.build-target-frameworks>>
+      TESTFRAMEWORKS: <<parameters.test-target-framework>>
     steps:
       - checkout
-      - run: dotnet restore
-      - run: dotnet build src/LaunchDarkly.Cache -f netstandard1.4
-      - run: dotnet build src/LaunchDarkly.Cache -f netstandard1.6
-      - run: dotnet test test/LaunchDarkly.Cache.Tests/LaunchDarkly.Cache.Tests.csproj -f netcoreapp1.1
-  test-2.0:
-    docker:
-      - image: microsoft/dotnet:2.0-sdk-jessie
+      - run:
+          name: restore packages
+          command: dotnet restore test/LaunchDarkly.Cache.Tests
+      - run:
+          name: run tests
+          command: dotnet test test/LaunchDarkly.Cache.Tests/LaunchDarkly.Cache.Tests.csproj -f <<parameters.test-target-framework>>
+
+  test-windows:
+    parameters:
+      test-target-framework:
+        type: string
+      uses-native-implementation:
+        type: boolean
+    executor:
+      name: win/default
+      shell: powershell.exe
     steps:
       - checkout
-      - run: dotnet restore
-      - run: dotnet build src/LaunchDarkly.Cache -f netstandard2.0
-      - run: dotnet test test/LaunchDarkly.Cache.Tests/LaunchDarkly.Cache.Tests.csproj -f netcoreapp2.0
+      - run:
+          name: restore packages
+          command: dotnet restore test/LaunchDarkly.Cache.Tests
+      - run:
+          name: run tests
+          command: dotnet test test/LaunchDarkly.Cache.Tests/LaunchDarkly.Cache.Tests.csproj -f <<parameters.test-target-framework>>
