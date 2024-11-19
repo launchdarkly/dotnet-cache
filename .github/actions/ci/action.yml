@@ -19,7 +19,7 @@ runs:
     - run: dotnet restore src/LaunchDarkly.Cache
       env:
         BUILDFRAMEWORKS: netstandard2.1
-        TESTFRAMEWORK: ${{ inputs.target_test_framework }}
+        TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
       shell: bash
     - run: dotnet build src/LaunchDarkly.Cache
       shell: bash
