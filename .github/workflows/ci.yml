@@ -19,9 +19,6 @@ jobs:
           dotnet: [{sdk: '8.x', test-framework: 'net8.0'}, {sdk: '9.x', test-framework: 'net9.0'}]
     runs-on: ${{ matrix.os }}
     name: Build ${{ matrix.os }} - ${{ matrix.dotnet.sdk }} - ${{ matrix.dotnet.test-framework }}
-    env:
-      BUILDFRAMEWORKS: netstandard2.1
-      TESTFRAMEWORK: ${{ matrix.dotnet.test-framework }}
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/ci

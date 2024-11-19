@@ -22,6 +22,12 @@ runs:
         TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
       shell: bash
     - run: dotnet build src/LaunchDarkly.Cache
+      env:
+        BUILDFRAMEWORKS: netstandard2.1
+        TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
       shell: bash
     - run: dotnet test test/LaunchDarkly.Cache.Tests
+      env:
+        BUILDFRAMEWORKS: netstandard2.1
+        TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
       shell: bash
