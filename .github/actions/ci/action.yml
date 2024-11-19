@@ -1,0 +1,33 @@
+name: CI
+description: Runs CI for the .NET Server SDK
+inputs:
+  sdk:
+    description: 'The dotnet SDK to use.'
+    required: false
+    default: '9'
+  target_test_framework:
+    description: 'The target test framework to use.'
+    required: false
+    default: 'net9.0'
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: ${{ inputs.sdk }}
+    - run: dotnet restore src/LaunchDarkly.Cache
+      env:
+        BUILDFRAMEWORKS: netstandard2.1
+        TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
+      shell: bash
+    - run: dotnet build src/LaunchDarkly.Cache
+      env:
+        BUILDFRAMEWORKS: netstandard2.1
+        TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
+      shell: bash
+    - run: dotnet test test/LaunchDarkly.Cache.Tests
+      env:
+        BUILDFRAMEWORKS: netstandard2.1
+        TESTFRAMEWORKS: ${{ inputs.target_test_framework }}
+      shell: bash

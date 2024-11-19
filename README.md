@@ -1,7 +1,5 @@
 # LaunchDarkly Caching Tools for .NET
 
-[![CircleCI](https://circleci.com/gh/launchdarkly/dotnet-cache.svg?style=svg)](https://circleci.com/gh/launchdarkly/dotnet-cache)
-
 This library provides a caching abstraction used by other LaunchDarkly .NET assemblies. .NET provides several caching tools, but their functionality differs between .NET Framework and .NET Standard and does not include some desired behaviors.
 
 ## Supported .NET versions
