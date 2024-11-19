@@ -1,0 +1,30 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [main, 'feat/**']
+    paths-ignore:
+      - '**.md' #Do not need to run CI for markdown changes.
+  pull_request:
+    branches: [main, 'feat/**']
+    paths-ignore:
+      - '**.md'
+  workflow_call:
+
+jobs:
+  build-test-linux:
+    strategy:
+      matrix:
+          os: ['ubuntu-latest', 'windows-latest']
+          dotnet: [{sdk: '8.x', test-framework: 'net8.0'}, {sdk: '9.x', test-framework: 'net9.0'}]
+    runs-on: ${{ matrix.os }}
+    name: Build ${{ matrix.os }} - ${{ matrix.dotnet.sdk }} - ${{ matrix.dotnet.test-framework }}
+    env:
+      BUILDFRAMEWORKS: netstandard2.1
+      TESTFRAMEWORK: ${{ matrix.dotnet.test-framework }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/ci
+        with:
+          sdk: ${{ matrix.dotnet.sdk }}
+          target_test_framework: ${{ matrix.dotnet.test-framework }}
