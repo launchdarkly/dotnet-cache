@@ -13,7 +13,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/setup-dotnet@v4
+    - uses: actions/setup-dotnet@v6
       with:
         dotnet-version: ${{ inputs.sdk }}
     - run: dotnet restore src/LaunchDarkly.Cache
