@@ -9,6 +9,8 @@ This version of the library is built for the following targets:
 * .NET Standard 2.0 (compatible with .NET Core 2.1+ and .NET 5.0+)
 * .NET Framework 4.5.2 (compatible with .NET Framework 4.5.x/4.6.x)
 
+While these are the minimum supported versions, you should use the latest patched version of a supported .NET release.
+
 ## Signing
 
 The published version of this assembly is both digitally signed by LaunchDarkly and [strong-named](https://docs.microsoft.com/en-us/dotnet/framework/app-domains/strong-named-assemblies). Building the code locally in the default Debug configuration does not sign the assembly and does not require a key file.
